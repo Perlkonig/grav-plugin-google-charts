@@ -1,12 +1,7 @@
 # Google Charts Plugin
 
-**This README.md file should be modified to describe the features, installation, configuration, and general usage of this plugin.**
+The **Google Charts** Plugin is for [Grav CMS](http://github.com/getgrav/grav). It allows you to embed [Google charts](https://developers.google.com/chart/) into pages via shortcode. It supports 18 of the 27 currently available charts. 
 
-https://developers.google.com/chart/
-
-https://developers.google.com/chart/interactive/docs/basic_load_libs
-
-Supported:
   * [Area](https://developers.google.com/chart/interactive/docs/gallery/areachart)
   * [Bar](https://developers.google.com/chart/interactive/docs/gallery/barchart)
   * [Bubble](https://developers.google.com/chart/interactive/docs/gallery/bubblechart)
@@ -25,10 +20,6 @@ Supported:
   * [Tree Map](https://developers.google.com/chart/interactive/docs/gallery/treemap)
   * [Waterfall](https://developers.google.com/chart/interactive/docs/gallery/candlestickchart#Waterfall)
   * [Word Trees](https://developers.google.com/chart/interactive/docs/gallery/wordtree)
-
-The **Google Charts** Plugin is for [Grav CMS](http://github.com/getgrav/grav). Embeds Google charts into pages
-
-[gchart id= type= data= options= data_str= options_str= /]
 
 ## Installation
 
@@ -50,27 +41,153 @@ You should now have all the plugin files under
 
     /your/site/grav/user/plugins/google-charts
 	
-> NOTE: This plugin is a modular component for Grav which requires [Grav](http://github.com/getgrav/grav) and the [Error](https://github.com/getgrav/grav-plugin-error) and [Problems](https://github.com/getgrav/grav-plugin-problems) to operate.
+> NOTE: This plugin is a modular component for Grav which requires [Grav](http://github.com/getgrav/grav) and the [Error](https://github.com/getgrav/grav-plugin-error), [Problems](https://github.com/getgrav/grav-plugin-problems) and [Shortcode Core](https://github.com/getgrav/grav-plugin-shortcode-core) plugins to operate.
 
 ## Configuration
 
 Before configuring this plugin, you should copy the `user/plugins/google-charts/google-charts.yaml` to `user/config/plugins/google-charts.yaml` and only edit that copy.
 
-Here is the default configuration and an explanation of available options:
-
-```yaml
-enabled: true
-```
+There is only one configuration option: `enabled`. This is how you disable the shortcode entirely. See the documentation for the [Shortcode Core plugin](https://github.com/getgrav/grav-plugin-shortcode-core) for information on how to enable/disable shortcodes on a page-by-page basis.
 
 ## Usage
 
-**Describe how to use the plugin.**
+### Shortcode
 
-## Credits
+Charts are inserted via the `[gchart]` shortcode, which has the following options:
 
-**Did you incorporate third-party code? Want to thank somebody?**
+  * `type` (required): This determines the type of chart you wish to draw. It must be one of the following:
+    - area
+    - bar
+    - bar-material
+    - bubble
+    - candlestick 
+    - column
+    - column-materi
+    - combo
+    - donut
+    - gauge
+    - geochart
+    - histogram
+    - line
+    - line-material
+    - map
+    - pie
+    - scatter
+    - scatter-mater
+    - stepped
+    - treemap
+    - waterfall
+    - wordtree    
 
-## To Do
+  * `id` (required): The id can only consist of upper- and lowercase letters and digits. The id is used both as the `id` attribute of the final `<div>` tag and as part of the function names in the JavaScript code.
 
-- [ ] Future plans, if any
+  * `class` (optional): If provided, the value will be passed through PHP's `htmlspecialchars` and inserted into the `class` attribute of the final `<div>` tag.
+
+  * `data` (optional): Links to where in the page header the chart data can be found (see "Data" section below).
+
+  * `options` (optional): Links to where in the page header the chart options can be found (see "Data" section below).
+
+Normally the shortcode is self-closing (i.e. `[gchart /]`), but see the "Data" section below for exceptions.
+
+### Data
+
+This plugin supports charts whose data are passed via `google.visualization.arrayToDataTable` and whose options can be expressed as simple JSON objects. There are two ways to pass this information to the shortcode: via the page header or via the shortcode itself.
+
+#### Page Header
+
+##### Default
+
+If the shortcode options `data` or `options` are not provided, then by default the plugin looks for the following in the parsed front matter of the page: `page.header.google-charts.ID.data/options`, where `ID` is the `id` given in the shortcode. `data` must be an array and `options` must be an object.
+
+##### Custom
+
+You can also use the [Import plugin](https://github.com/Deester4x4jr/grav-plugin-import) to load YAML and JSON files into your page header. If you do this, you need to tell the plugin where to find the data. You do this by passing dot notation via the shortcode pointing to where in the page header the data lives.
+
+Let's say you had the following in your front matter:
+
+```yaml
+imports:
+  - data.yaml
+  - options.yaml
+```
+
+You would need to pass the following options to the shortcode: `data="imports.data"` and `options="imports.options"`.
+
+#### Shortcode Content
+
+You can also pass the information within the shortcode itself. To do this, between the opening and closing `[gchart]` tags, insert a valid JSON string representing an object with the `data` property and an optional `options` property. Those will be used to render the chart.
+
+##### IMPORTANT NOTE
+
+In Grav, markdown is processed before shortcodes. This means that the included JSON string has to follow three rules to ensure it will survive the initial processing:
+
+1. The opening brace of the JSON string must occur on the same line as the opening `[gchart]` tag.
+2. The closing brace of the JSON string must occur on the same line as the closing `[/gchart]` tag.
+3. The JSON string itself can contain no blank lines.
+
+To wit:
+
+```json
+[gchart type=donut id=test]{
+    "data": [
+        ["Task", "Hours per Day"],
+        ["Work", 11],
+        ["Eat", 2],
+        ["Commute", 2],
+        ["Watch TV", 2],
+        ["Sleep", 7]
+    ],
+    "options": {
+        "title": "My Daily Activities",
+        "pieHole": 0.4
+    }
+}[/gchart]
+```
+
+### Errors
+
+The plugin tries to catch common errors. When an expected error occurs, a (hopefully) helpful error messages is outputted in place of the shortcode. If the shortcode comes through verbatim, then something is wrong with the actual parsing. Runtime exceptions should be rare and will usually be caused by something very weird in your data.
+
+### Examples
+
+[A demo of the plugin is available on my website.](https://perlkonig.com/demos/google-charts) You can view the source code to see how the front matter and shortcodes look.
+
+Here are some example shortcodes:
+
+  * Minimal example; assumes the data and options can be found in the front matter under `google-charts`
+
+    `[gchart type=bubble id=test/]`
+
+  * Points to files loaded by the Import plugin: `data.yaml` and `options.yaml`
+
+    `[gchart type=bar-material data="imports.data" options="imports.options"/]`
+
+  * JSON data is passed within the shortcode; also applies a `class` attribute to the `<div>` tag
+
+    ```json
+    [gchart type=donut id=test3 class="left"]{
+        "data": [
+            ["Task", "Hours per Day"],
+            ["Work", 11],
+            ["Eat", 2],
+            ["Commute", 2],
+            ["Watch TV", 2],
+            ["Sleep", 7]
+        ],
+        "options": {
+            "title": "My Daily Activities",
+            "pieHole": 0.4
+        }
+    }[/gchart]
+    ```
+## Caveats
+
+I have not been able to test every single supported chart type in every possible circumstance. Bug reports are warmly welcomed. But before submitting an issue, double check that the data you're passing is well formed. I use (but do not endorse) the following tools:
+
+  * [JSONLint](http://jsonlint.com/)
+  * [YAML Lint](http://www.yamllint.com/)
+  * [JSON to YAML](http://www.json2yaml.com/) (to convert JSON data into something I can paste into the front matter of my page)
+
+I will endeavour to support additional chart types over time.
+
 

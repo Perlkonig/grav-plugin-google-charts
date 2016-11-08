@@ -37,11 +37,9 @@ class GChartShortcode extends Shortcode
     }
 
     public function process(ShortcodeInterface $sc) {
+        // Get page header
         $header = $this->grav['page']->header();
         $header = new \Grav\Common\Page\Header((array) $header);
-
-    	// Get shortcode ID
-    	$scid = $this->shortcode->getId($sc);
 
     	// Load overall Google Charts library
     	$this->shortcode->addAssets('js', 'https://www.gstatic.com/charts/loader.js');
