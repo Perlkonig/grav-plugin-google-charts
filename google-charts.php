@@ -23,27 +23,11 @@ class GoogleChartsPlugin extends Plugin
     public static function getSubscribedEvents()
     {
         return [
-            'onPluginsInitialized' => ['onPluginsInitialized', 10]
+            'onShortcodeHandlers' => ['onShortcodeHandlers', 0]
         ];
     }
 
-    /**
-     * Initialize the plugin
-     */
-    public function onPluginsInitialized()
-    {
-        // Don't proceed if we are in the admin plugin
-        if ($this->isAdmin()) {
-            return;
-        }
-
-        // Enable the main event we are interested in
-        $this->enable([
-            'onShortcodeHandlers' => ['onShortcodeHandlers', 0]
-        ]);
-    }
-
-    public function onShortcodeHandlers()
+    public function onShortcodeHandlers(Event $e)
     {
         $this->grav['shortcode']->registerShortcode('GChartShortcode.php', __DIR__);
         // $this->grav['shortcode']->registerAllShortcodes(__DIR__.'/shortcodes');
