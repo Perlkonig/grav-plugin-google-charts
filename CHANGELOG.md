@@ -1,3 +1,9 @@
+# v1.1.0
+## 07/06/2018
+
+1. [](#bugfix)
+    * Fixed caching problem (thanks to @pamtbaau on Discourse)
+
 # v1.0.1
 ##  01/31/2017
 

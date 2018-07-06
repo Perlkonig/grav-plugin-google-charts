@@ -128,7 +128,7 @@ class GChartShortcode extends Shortcode
 
         // Inject the script
         $code = implode("\n", $code);
-        $this->grav['assets']->addInlineJs($code);
+        //$this->grav['assets']->addInlineJs($code);
 
         // Inject the <div> tag
         $output = '<div id="'.$id.'"';
@@ -136,7 +136,7 @@ class GChartShortcode extends Shortcode
             $output .= ' class="'.htmlspecialchars($class).'"';
         }
         $output .= '></div>';
-        return $output;
+        return $output . "<script>$code</script>";
     }
 
     private static function sanitize($str) {
