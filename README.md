@@ -1,6 +1,6 @@
 # Google Charts Plugin
 
-The **Google Charts** Plugin is for [Grav CMS](http://github.com/getgrav/grav). It allows you to embed [Google charts](https://developers.google.com/chart/) into pages via shortcode. It supports 18 of the 27 currently available charts. 
+The **Google Charts** Plugin is for [Grav CMS](http://github.com/getgrav/grav). It allows you to embed [Google charts](https://developers.google.com/chart/) into pages via shortcode. It supports 19 of the 27 currently available charts. 
 
   * [Area](https://developers.google.com/chart/interactive/docs/gallery/areachart)
   * [Bar](https://developers.google.com/chart/interactive/docs/gallery/barchart)
@@ -17,6 +17,7 @@ The **Google Charts** Plugin is for [Grav CMS](http://github.com/getgrav/grav). 
   * [Pie](https://developers.google.com/chart/interactive/docs/gallery/piechart)
   * [Scatter](https://developers.google.com/chart/interactive/docs/gallery/scatterchart)
   * [Stepped Area](https://developers.google.com/chart/interactive/docs/gallery/steppedareachart)
+  * [Timelines](https://developers.google.com/chart/interactive/docs/gallery/timeline)
   * [Tree Map](https://developers.google.com/chart/interactive/docs/gallery/treemap)
   * [Waterfall](https://developers.google.com/chart/interactive/docs/gallery/candlestickchart#Waterfall)
   * [Word Trees](https://developers.google.com/chart/interactive/docs/gallery/wordtree)

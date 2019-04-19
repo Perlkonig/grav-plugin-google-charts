@@ -26,6 +26,7 @@ class GChartShortcode extends Shortcode
         'scatter' => ['package' => 'corechart', 'visname' => 'ScatterChart'], 
         'scatter-material' => ['package' => 'scatter', 'visname' => 'Scatter'],
         'stepped' => ['package' => 'corechart', 'visname' => 'SteppedAreaChart'], 
+        'timeline' => ['package' => 'timeline', 'visname' => 'Timeline'], 
         'treemap' => ['package' => 'treemap', 'visname' => 'TreeMap'], 
         'waterfall' => ['package' => 'corechart', 'visname' => 'CandlestickChart'], 
         'wordtree' => ['package' => 'wordtree', 'visname' => 'WordTree'],

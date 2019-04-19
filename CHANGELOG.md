@@ -1,3 +1,9 @@
+# v1.1.1
+## 04/19/2019
+
+1. [](#new)
+    * Added support for Timelines. Thanks to @leycec for prompting me to dig a little.
+
 # v1.1.0
 ## 07/06/2018
 
