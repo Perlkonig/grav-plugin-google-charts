@@ -52,7 +52,7 @@ class GChartShortcode extends Shortcode
         }
         $id = static::sanitize($id);
         if (strlen($id) < 1) {
-            return '<p>Google Charts: You must provide a valid ID for this chart (only letters and digits).</p>';
+            return '<p>Google Charts: You must provide a valid ID for this chart (only letters, digits, and underscores).</p>';
         }
         $type = $sc->getParameter('type', null);
         if ( ($type === null) || (! array_key_exists($type, $this->supported)) ) {
@@ -141,7 +141,7 @@ class GChartShortcode extends Shortcode
     }
 
     private static function sanitize($str) {
-        $pattern = '/[^a-zA-Z0-9]/';
+        $pattern = '/[^a-zA-Z0-9_]/';
         return preg_replace($pattern, '', (string) $str);
     }
 }
