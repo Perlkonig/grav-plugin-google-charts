@@ -80,7 +80,7 @@ Charts are inserted via the `[gchart]` shortcode, which has the following option
     - waterfall
     - wordtree    
 
-  * `id` (required): The id can only consist of upper- and lowercase letters and digits. The id is used both as the `id` attribute of the final `<div>` tag and as part of the function names in the JavaScript code.
+  * `id` (required): The id can only consist of upper- and lowercase letters, digits, and the underscore. The id is used both as the `id` attribute of the final `<div>` tag and as part of the function names in the JavaScript code.
 
   * `class` (optional): If provided, the value will be passed through PHP's `htmlspecialchars` and inserted into the `class` attribute of the final `<div>` tag.
 
