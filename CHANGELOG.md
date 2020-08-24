@@ -1,3 +1,10 @@
+# v1.2.0
+## 08/24/2020
+
+1. [](#new)
+    * IDs may now include underscores (thank you @Skymirrh).
+    * Now works properly with modular pages (thank you @Skymirrh).
+
 # v1.1.1
 ## 04/19/2019
 
