@@ -39,7 +39,7 @@ class GChartShortcode extends Shortcode
 
     public function process(ShortcodeInterface $sc) {
         // Get page header
-        $header = $this->grav['page']->header();
+        $header = $this->shortcode->getPage()->header();
         $header = new \Grav\Common\Page\Header((array) $header);
 
     	// Load overall Google Charts library
