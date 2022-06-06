@@ -1,5 +1,7 @@
 # Google Charts Plugin
 
+***Abandonment Notice:** I'm afraid I simply don't have the time to maintain my Grav themes and plugins. Those interested in taking over should refer to the ["Abandoned Resource Protocol"](https://learn.getgrav.org/17/advanced/grav-development#abandoned-resource-protoc). Feel free to fork and replace. So long, and thanks for all the fish.*
+
 The **Google Charts** Plugin is for [Grav CMS](http://github.com/getgrav/grav). It allows you to embed [Google charts](https://developers.google.com/chart/) into pages via shortcode. It supports 19 of the 27 currently available charts. 
 
   * [Area](https://developers.google.com/chart/interactive/docs/gallery/areachart)
